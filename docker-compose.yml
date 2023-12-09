@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  api:
+    container_name: game_rails_back
+    build: ./backend
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle install && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - ./backend:/api
+    ports:
+      - 3001:3000
+    # environment:
+      # 1ならデバックモード
+      # 本番環境では0(デバックを表示させない)
+      # - DEBUG=1
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
+
+  front:
+    container_name: game_next_front
+    build: ./frontend 
+    volumes:
+     - ./frontend/src:/usr/src/app
+    ports:
+      - "4000:3000"
+    #初回起動及びbuild時
+    #command: sh -c "yarn build"
+    #通常起動
+    command: sh -c "yarn next dev"
+    tty: true
+    stdin_open: true
+    environment:
+     - development
+    depends_on:
+      - api
+
+  db:
+    container_name: 'game_db_mysql'
+    build: ./db
+    # configと設定を合わせる   
+    environment:                 
+      MYSQL_ROOT_PASSWORD: password
+      # MYSQL_DATABASE: rails_db
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: password
+      TZ: 'Asia/Tokyo'
+      command: --default-authentication-plugin=mysql_native_password
+    # sqlproに接続するためのポート設定（本番では開けない事）
+    ports:
+      - "4306:3306"
+    volumes:
+      - ./db/mysql_data:/var/lib/mysql
