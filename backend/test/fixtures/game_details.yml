@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  game_id: 1
+  review_score: 1
+  review_score_desc: MyString
+  total_positive_review: 1
+  total_negative_review: 1
+  total_review: 1
+
+two:
+  game_id: 1
+  review_score: 1
+  review_score_desc: MyString
+  total_positive_review: 1
+  total_negative_review: 1
+  total_review: 1
