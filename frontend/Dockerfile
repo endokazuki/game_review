@@ -3,7 +3,7 @@ FROM node:18.17.0-alpine
 WORKDIR /usr/src/app
 
 # build後下記のコマンドを実行(一度TS環境作成した後は再作成不要)
-#docker-compose run --rm front sh -c 'npx create-next-app src --typescript'
+#docker-compose run --rm front sh -c 'npx create-next-app gamefront --typescript'
 
 #コンテナ初回起動時、必要なライブラリをインストールする
 RUN yarn install

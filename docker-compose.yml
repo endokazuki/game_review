@@ -22,7 +22,7 @@ services:
     container_name: game_next_front
     build: ./frontend 
     volumes:
-     - ./frontend/src:/usr/src/app
+     - ./frontend/src/gamefront:/usr/src/app
     ports:
       - "4000:3000"
     #初回起動及びbuild時
