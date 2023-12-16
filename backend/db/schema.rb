@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_14_143040) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_16_050636) do
   create_table "game_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "game_id", null: false
     t.integer "review_score"
@@ -24,8 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_14_143040) do
   end
 
   create_table "games", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "game_id"
-    t.string "primary_key"
+    t.integer "app_id"
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
