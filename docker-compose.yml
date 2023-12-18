@@ -2,13 +2,12 @@ version: '3'
 
 services:
   api:
-    container_name: game_rails_back
     build: ./backend
     command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle install && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - ./backend:/api
     ports:
-      - 3001:3000
+      - 3000:3000
     # environment:
       # 1ならデバックモード
       # 本番環境では0(デバックを表示させない)
@@ -19,7 +18,6 @@ services:
     stdin_open: true
 
   front:
-    container_name: game_next_front
     build: ./frontend 
     volumes:
      - ./frontend/src/gamefront:/usr/src/app
@@ -37,7 +35,6 @@ services:
       - api
 
   db:
-    container_name: 'game_db_mysql'
     build: ./db
     # configと設定を合わせる   
     environment:                 

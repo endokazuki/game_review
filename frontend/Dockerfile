@@ -13,3 +13,4 @@ RUN yarn add -D tailwindcss postcss autoprefixer cssnano
 RUN yarn add next
 RUN yarn tailwindcss init -p
 RUN yarn add -D eslint-plugin-tailwindcss
+RUN yarn add axios
