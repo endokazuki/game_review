@@ -10,14 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_08_141227) do
-  create_table "game_genres", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "game_id"
-    t.bigint "genre_id"
+ActiveRecord::Schema[7.0].define(version: 2024_01_08_154523) do
+  create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", limit: 60, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_game_genres_on_game_id"
-    t.index ["genre_id"], name: "index_game_genres_on_genre_id"
+  end
+
+  create_table "game_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "game_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_game_categories_on_category_id"
+    t.index ["game_id"], name: "index_game_categories_on_game_id"
   end
 
   create_table "game_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -35,13 +41,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_08_141227) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "release_date"
-  end
-
-  create_table "genres", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "genre_id"
-    t.string "name", limit: 60, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "reviews", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -62,8 +61,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_08_141227) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "game_genres", "games"
-  add_foreign_key "game_genres", "genres"
+  add_foreign_key "game_categories", "categories"
+  add_foreign_key "game_categories", "games"
   add_foreign_key "game_types", "games"
   add_foreign_key "game_types", "types"
   add_foreign_key "reviews", "games"
