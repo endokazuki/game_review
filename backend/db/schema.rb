@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_08_154523) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_09_141240) do
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 60, null: false
     t.datetime "created_at", null: false
@@ -55,6 +55,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_08_154523) do
     t.index ["game_id"], name: "index_reviews_on_game_id"
   end
 
+  create_table "screenshots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "game_id"
+    t.string "url", limit: 150, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_screenshots_on_game_id"
+  end
+
   create_table "types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 60, null: false
     t.datetime "created_at", null: false
@@ -66,4 +74,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_08_154523) do
   add_foreign_key "game_types", "games"
   add_foreign_key "game_types", "types"
   add_foreign_key "reviews", "games"
+  add_foreign_key "screenshots", "games"
 end
