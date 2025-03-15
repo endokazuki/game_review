@@ -1,11 +1,11 @@
 "use client";
-import { FC } from "react";
+import Select from "react-select";
 
-type Post = {
-  created_at: ReactNode;
-  id: number;
-  title: string;
-};
+// type Post = {
+//   created_at: ReactNode;
+//   id: number;
+//   title: string;
+// };
 
 // pages/index.tsx
 import { useState } from "react";
@@ -13,6 +13,15 @@ import { useState } from "react";
 const SearchPage: React.FC = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<string[]>([]);
+
+  const genreOptions = [
+    { value: "/", label: "ホーム" },
+    { value: "game", label: "ゲーム一覧" },
+    { value: "article", label: "記事" },
+    { value: "policy", label: "プライバシーポリシー" },
+  ];
+
+  const [selectedGenre, setSelectedGenre] = useState(genreOptions[0]);
 
   const handleSearch = async () => {
     try {
@@ -38,6 +47,12 @@ const SearchPage: React.FC = () => {
       <h1 className="text-4xl font-bold text-center mb-8">Search Page</h1>
 
       <div className="flex items-center">
+        <Select
+          options={genreOptions}
+          value={selectedGenre}
+          onChange={(value) => (value ? setSelectedGenre(value) : null)}
+          placeholder="Select Genre"
+        />
         <input
           type="text"
           value={query}
